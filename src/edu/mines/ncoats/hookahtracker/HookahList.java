@@ -13,15 +13,15 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HookahList extends ListFragment {
-//	String[] hookahEntries = new String[] {
-//			"",
-//	};
-	String[] hookahEntries;
+	
+	String[] hookahEntries = new String[] {
+			"List Not Implemented",
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
 		//	entries[8] = getString(R.string.test);
-		hookahEntries = getResources().getStringArray(R.array.entries);
+//		hookahEntries = getResources().getStringArray(R.array.entries);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, hookahEntries);
 		setListAdapter(adapter);
 

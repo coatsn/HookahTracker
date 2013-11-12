@@ -27,32 +27,38 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090019;
+        public static final int action_settings=0x7f09001f;
         public static final int add_bowl=0x7f090008;
-        public static final int add_hookah=0x7f09000e;
-        public static final int add_new_shisha_brand=0x7f090015;
+        public static final int add_coal=0x7f09000e;
+        public static final int add_hookah=0x7f090014;
+        public static final int add_new_shisha_brand=0x7f09001b;
         public static final int bowl_fragment=0x7f090007;
         public static final int bowl_grams_input=0x7f09000c;
         public static final int bowl_grams_text=0x7f09000b;
         public static final int bowl_name_input=0x7f09000a;
+        public static final int coal_fragment=0x7f09000d;
+        public static final int coal_name_input=0x7f090010;
+        public static final int coal_number_input=0x7f090012;
+        public static final int coal_number_text=0x7f090011;
         public static final int coals_fragment=0x7f090003;
         public static final int hookah_bowl_text=0x7f090009;
+        public static final int hookah_coal_text=0x7f09000f;
         public static final int hookah_fragment=0x7f090005;
-        public static final int hookah_height_input=0x7f090012;
-        public static final int hookah_height_text=0x7f090011;
-        public static final int hookah_hoses_input=0x7f090014;
-        public static final int hookah_hoses_text=0x7f090013;
-        public static final int hookah_name_input=0x7f090010;
-        public static final int hookah_name_text=0x7f09000f;
+        public static final int hookah_height_input=0x7f090018;
+        public static final int hookah_height_text=0x7f090017;
+        public static final int hookah_hoses_input=0x7f09001a;
+        public static final int hookah_hoses_text=0x7f090019;
+        public static final int hookah_name_input=0x7f090016;
+        public static final int hookah_name_text=0x7f090015;
         public static final int list_fragment=0x7f090000;
         public static final int new_bowl_entry=0x7f090002;
         public static final int new_coal_entry=0x7f090004;
         public static final int new_hookah_entry=0x7f090006;
-        public static final int new_shisha_entry=0x7f090018;
-        public static final int shisha_brand_name_input=0x7f090017;
-        public static final int shisha_brand_name_text=0x7f090016;
+        public static final int new_shisha_entry=0x7f09001e;
+        public static final int shisha_brand_name_input=0x7f09001d;
+        public static final int shisha_brand_name_text=0x7f09001c;
         public static final int shisha_fragment=0x7f090001;
-        public static final int take_picture=0x7f09000d;
+        public static final int take_picture=0x7f090013;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -61,11 +67,13 @@ public final class R {
         public static final int hookah_list=0x7f030003;
         public static final int new_bowl=0x7f030004;
         public static final int new_bowl_fragment=0x7f030005;
-        public static final int new_hookah=0x7f030006;
-        public static final int new_hookah_fragment=0x7f030007;
-        public static final int new_shisha=0x7f030008;
-        public static final int new_shisha_fragment=0x7f030009;
-        public static final int shisha_list=0x7f03000a;
+        public static final int new_coal=0x7f030006;
+        public static final int new_coal_fragment=0x7f030007;
+        public static final int new_hookah=0x7f030008;
+        public static final int new_hookah_fragment=0x7f030009;
+        public static final int new_shisha=0x7f03000a;
+        public static final int new_shisha_fragment=0x7f03000b;
+        public static final int shisha_list=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -80,6 +88,8 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int bowl_grams=0x7f05000e;
         public static final int bowl_name=0x7f05000f;
+        public static final int coal_name=0x7f050010;
+        public static final int coal_number=0x7f050011;
         public static final int hello_world=0x7f050002;
         public static final int hookah_height=0x7f050009;
         public static final int hookah_hoses=0x7f05000a;

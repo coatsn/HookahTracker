@@ -16,12 +16,13 @@ public class CoalsList extends ListFragment {
 //	String[] hookahEntries = new String[] {
 //			"",
 //	};
-	String[] coalEntries;
+	String[] coalEntries = new String[] {
+			"List Not Implemented"};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
 		//	entries[8] = getString(R.string.test);
-		coalEntries = getResources().getStringArray(R.array.entries);
+//		coalEntries = getResources().getStringArray(R.array.entries);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, coalEntries);
 		setListAdapter(adapter);
 

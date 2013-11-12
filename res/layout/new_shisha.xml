@@ -18,6 +18,7 @@
     	android:layout_weight="1"
     	android:text="@string/add"
     	android:textSize="24sp"
+    	android:onClick="addShisha"
     />
     
 

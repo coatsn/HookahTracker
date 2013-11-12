@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class AddNewHookah extends Activity {
+public class AddNewCoal extends Activity {
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class AddNewHookah extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.new_hookah);
+		setContentView(R.layout.new_coal);
 	}
 
 	
@@ -32,12 +32,7 @@ public class AddNewHookah extends Activity {
 		return true;
 	}
 	
-	public void addHookah(View view) {
-		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-		toast.show();
-	}
-	
-	public void takePicture(View view) {
+	public void addCoal(View view) {
 		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
 		toast.show();
 	}

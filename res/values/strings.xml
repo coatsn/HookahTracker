@@ -17,6 +17,8 @@
     <string name="shisha_brand">Brand Name</string>
     <string name="bowl_grams">Grams</string>
     <string name="bowl_name">Bowl Name</string>
+    <string name="coal_name">Coal Name</string>
+    <string name="coal_number">Number of Coals</string>
     
     <string-array name="entries"> 
           <item>Hookahs</item>
