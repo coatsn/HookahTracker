@@ -22,6 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.HookahActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.ShishaActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.BowlActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.CoalsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.AddNewHookah"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.AddNewShisha"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.AddNewBowl"
+            android:label="@string/app_name" >
+        </activity>
+        
     </application>
 
 </manifest>
