@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public class AddNewShisha extends Activity {
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.new_hookah, container, false);
-//    }
+
+	/**
+	* Calls the xml file for creation and gets the intent.
+	* 
+	* @param savedInstanceState, Retrieves app data
+	*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,11 @@ public class AddNewShisha extends Activity {
 		return true;
 	}
 	
+	/**
+	* This will add a new brand of shisha to the list of different brands
+	* 
+	* @param view Allows the view to interact with the app
+	*/
 	public void addShisha(View view) {
 		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
 		toast.show();

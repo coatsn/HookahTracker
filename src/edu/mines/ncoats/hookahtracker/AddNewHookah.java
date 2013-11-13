@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 public class AddNewHookah extends Activity {
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.new_hookah, container, false);
-//    }
+
+	/**
+	* Calls the xml file for creation and gets the intent.
+	* 
+	* @param savedInstanceState, Retrieves app data
+	*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +32,21 @@ public class AddNewHookah extends Activity {
 		return true;
 	}
 	
+	/**
+	* This will add a new hookah to the list of hookahs
+	* 
+	* @param view Allows the view to interact with the app
+	*/
 	public void addHookah(View view) {
 		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
 		toast.show();
 	}
 	
+	/**
+	* This will take the user to their camera app to take a photo, which will be saved to the hookah that they are adding
+	* 
+	* @param view Allows the view to interact with the app
+	*/
 	public void takePicture(View view) {
 		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
 		toast.show();

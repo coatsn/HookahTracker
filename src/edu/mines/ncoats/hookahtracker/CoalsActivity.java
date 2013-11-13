@@ -10,6 +10,11 @@ import android.view.View;
 
 public class CoalsActivity extends Activity {
 
+	/**
+	* Calls the xml file for creation and gets the intent.
+	* 
+	* @param savedInstanceState, Retrieves app data
+	*/
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,6 +30,11 @@ public class CoalsActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	* This will send the user to the AddNewCoal activity
+	* 
+	* @param view Allows the view to interact with the app
+	*/
 	public void add(View view) {
 		Intent intent = new Intent(this, AddNewCoal.class);
 		startActivity(intent);

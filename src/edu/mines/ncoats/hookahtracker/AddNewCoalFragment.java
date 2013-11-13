@@ -8,6 +8,13 @@ import android.view.ViewGroup;
 
 public class AddNewCoalFragment extends Fragment {
 
+	/**
+	* Calls the xml file for creation
+	* 
+	* @param savedInstanceState, Retrieves app data
+	*        container, tells the app where to inflate the layout
+	*        inflater, allows the app to inflate the fragment
+	*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
