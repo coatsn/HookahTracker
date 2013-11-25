@@ -63,6 +63,26 @@
             android:label="@string/app_name" >
         </activity>
         
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.SettingsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.SessionActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.StatisticsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.HookahInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
     </application>
 
 </manifest>

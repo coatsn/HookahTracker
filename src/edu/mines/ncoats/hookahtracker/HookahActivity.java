@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 
@@ -30,6 +31,27 @@ public class HookahActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+	    switch(item.getItemId()) {
+	    case R.id.action_settings:
+	    	Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+	        break;
+	    case R.id.action_about:
+	    	new AboutDialog().show(getFragmentManager(), "AboutDialog");
+	        break;
+	    case R.id.action_help:
+	    	new HelpDialog().show(getFragmentManager(), "HelpDialog");
+	    	break;
+	    case R.id.action_statistics:
+	    	Intent intent2 = new Intent(getApplicationContext(), StatisticsActivity.class);
+			startActivity(intent2);
+	    	break;
+	    }
+	    return true;
+	}
+	
 	/**
 	* This will send the user to the AddNewHookah activity
 	* 
@@ -40,5 +62,10 @@ public class HookahActivity extends Activity {
 		startActivity(intent);
 	}
 
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		startActivity(intent);
+	}
 }
 

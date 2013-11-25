@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/average_sessions_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/average_sessions"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/average_sessions_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    
+    <TextView
+        android:id="@+id/average_shisha_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/average_shisha"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/average_shisha_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    
+    <TextView
+        android:id="@+id/average_coals_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/average_coals"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/average_coals_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/favorite_hookah_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/favorite_hookah"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/favorite_hookah"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/favorite_shisha_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/favorite_shisha"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/favorite_shisha"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/total_sessions_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/total_sessions"
+        android:textSize="24sp"
+    />
+    
+    <TextView
+        android:id="@+id/total_sessions_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="24sp"
+    />
+    
+    
+
+</LinearLayout>

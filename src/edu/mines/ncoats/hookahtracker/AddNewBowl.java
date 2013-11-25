@@ -2,9 +2,11 @@ package edu.mines.ncoats.hookahtracker;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -32,6 +34,26 @@ public class AddNewBowl extends Activity {
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+	    switch(item.getItemId()) {
+	    case R.id.action_settings:
+	    	Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+	        break;
+	    case R.id.action_about:
+	    	new AboutDialog().show(getFragmentManager(), "AboutDialog");
+	        break;
+	    case R.id.action_help:
+	    	new HelpDialog().show(getFragmentManager(), "HelpDialog");
+	    	break;
+	    case R.id.action_statistics:
+	    	Intent intent2 = new Intent(getApplicationContext(), StatisticsActivity.class);
+			startActivity(intent2);
+	    	break;
+	    }
+	    return true;
+	}
 	/**
 	* This will add a new bowl to the list of bowls
 	* 

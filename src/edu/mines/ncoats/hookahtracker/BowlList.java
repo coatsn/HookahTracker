@@ -17,7 +17,8 @@ public class BowlList extends ListFragment {
 
 	String[] bowlEntries = new String[] {
 			"List Not Implemented",
-			"Add New Bowl"};
+			""
+			};
 	
 
 	/**
@@ -29,7 +30,9 @@ public class BowlList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
-
+		int last = bowlEntries.length - 1;
+		bowlEntries[last] = getString(R.string.add_bowl);
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, bowlEntries);
 		setListAdapter(adapter);
 

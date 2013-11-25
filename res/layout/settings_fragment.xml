@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <CheckBox
+        android:id="@+id/store_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/store_stats" />
+    
+    <Button
+    	android:id="@+id/clear_stats"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+
+    	android:text="@string/clear_stats"
+    	android:textSize="24sp"
+    	android:onClick="addShisha"
+    />
+    
+    <Button
+    	android:id="@+id/clear_database"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+
+    	android:text="@string/clear_database"
+    	android:textSize="24sp"
+    	android:onClick="clearDB"
+    />
+    
+    <Button
+    	android:id="@+id/clear_videos"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+
+    	android:text="@string/clear_videos"
+    	android:textSize="24sp"
+    	android:onClick="addShisha"
+    />
+    
+
+
+</LinearLayout>

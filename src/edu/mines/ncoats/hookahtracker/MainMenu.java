@@ -39,7 +39,7 @@ public class MainMenu extends ListFragment {
 	/**
 	* Overrides the onListItemClick function of a ListFragment
 	* 
-	* @param l, the ListView that is being clicked
+	* @param l, the LsistView that is being clicked
 	*        v, the view that the ListView is in
 	*        position, which item in the list is being clicked
 	*        id, the id of the item that is being clicked
@@ -64,6 +64,10 @@ public class MainMenu extends ListFragment {
 			break;
 		case 3:
 			intent = new Intent(getActivity().getApplicationContext(), CoalsActivity.class);
+			startActivity(intent);
+			break;
+		case 5:
+			intent = new Intent(getActivity().getApplicationContext(), SessionActivity.class);
 			startActivity(intent);
 			break;
 		default: 

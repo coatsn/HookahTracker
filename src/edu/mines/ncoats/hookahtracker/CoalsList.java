@@ -17,7 +17,8 @@ public class CoalsList extends ListFragment {
 
 	String[] coalEntries = new String[] {
 			"List Not Implemented",
-			"Add New Coal"};
+			""
+			};
 
 	/**
 	* Calls the xml file for creation
@@ -28,8 +29,9 @@ public class CoalsList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
-		//	entries[8] = getString(R.string.test);
-//		coalEntries = getResources().getStringArray(R.array.entries);
+		int last = coalEntries.length - 1;
+		coalEntries[last] = getString(R.string.add_coal);
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, coalEntries);
 		setListAdapter(adapter);
 

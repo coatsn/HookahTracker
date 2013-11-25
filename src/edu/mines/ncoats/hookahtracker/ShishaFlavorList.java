@@ -17,7 +17,8 @@ public class ShishaFlavorList extends ListFragment {
 
 	String[] shishaFlavorEntries = new String[] {
 			"List Not Implemented",
-			"Add New Flavor"};
+			""
+			};
 	
 
 	/**
@@ -29,7 +30,9 @@ public class ShishaFlavorList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
-
+		int last = shishaFlavorEntries.length - 1;
+		shishaFlavorEntries[last] = getString(R.string.add_flavor);
+		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, shishaFlavorEntries);
 		setListAdapter(adapter);
 
@@ -56,8 +59,4 @@ public class ShishaFlavorList extends ListFragment {
 			startActivity(intent);
 		}
 	}
-
-
-
-
 }
