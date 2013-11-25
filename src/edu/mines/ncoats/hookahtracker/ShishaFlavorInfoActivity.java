@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class StatisticsActivity extends Activity {
 
+public class ShishaFlavorInfoActivity extends Activity {
+	private String sName;
+	private ShishaBrand sb;
+	private TextView name;
+	
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
@@ -16,8 +21,17 @@ public class StatisticsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_shisha_flavor_info);
+		Intent intent = getIntent();
+//		hName = intent.getStringExtra("hookah_name");
+//		hookah = MainActivity.db.getHookahByName(hName);
+//		
+//		
+//		
+//		name = (TextView)findViewById(R.id.hookah_name_info);
+//		
+//		name.setText(hookah.getName());
 		
-		setContentView(R.layout.activity_statistics);
 	}
 
 	
@@ -41,8 +55,12 @@ public class StatisticsActivity extends Activity {
 	    case R.id.action_help:
 	    	new HelpDialog().show(getFragmentManager(), "HelpDialog");
 	    	break;
+	    case R.id.action_statistics:
+	    	Intent intent2 = new Intent(getApplicationContext(), StatisticsActivity.class);
+			startActivity(intent2);
+	    	break;
 	    }
 	    return true;
 	}
-
+	
 }

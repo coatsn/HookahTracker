@@ -1,26 +1,27 @@
 package edu.mines.ncoats.hookahtracker;
 
+import java.util.ArrayList;
+
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class ShishaFlavorList extends ListFragment {
 
-	String[] shishaFlavorEntries = new String[] {
-			"List Not Implemented",
-			""
-			};
-	
+//	String[] shishaFlavorEntries = new String[] {
+//			"List Not Implemented",
+//			""
+//			};
 
+	String[] shishaFlavorEntries;
+	ArrayList<Shisha> shish;
+	
 	/**
 	* Calls the xml file for creation
 	* 
@@ -30,6 +31,14 @@ public class ShishaFlavorList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
+		shish = MainActivity.db.getAllShishaFlavors(ShishaFlavorActivity.brandID);
+		Log.d("in the list", "in the list, the brandID is: " + ShishaFlavorActivity.brandID);
+		shishaFlavorEntries = new String[shish.size() + 1];
+		
+		for(int i = 0; i < shish.size(); i++) {
+			shishaFlavorEntries[i] = shish.get(i).name;
+		}
+		
 		int last = shishaFlavorEntries.length - 1;
 		shishaFlavorEntries[last] = getString(R.string.add_flavor);
 		
@@ -56,6 +65,9 @@ public class ShishaFlavorList extends ListFragment {
 
 		if(position == shishaFlavorEntries.length - 1){
 			Intent intent = new Intent(getActivity().getApplicationContext(), AddNewFlavor.class);
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent(getActivity().getApplicationContext(), ShishaFlavorInfoActivity.class);
 			startActivity(intent);
 		}
 	}

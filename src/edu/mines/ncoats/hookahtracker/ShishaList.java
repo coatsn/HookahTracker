@@ -1,25 +1,27 @@
 package edu.mines.ncoats.hookahtracker;
 
+import java.util.ArrayList;
+
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class ShishaList extends ListFragment {
 
-	String[] shishaEntries = new String[] {
-			"List Not Implemented",
-			""};
-	
+//	String[] shishaEntries = new String[] {
+//			"",
+//			""
+//	};
 
+	private String[] shishaEntries;
+	private ArrayList<ShishaBrand> sbs;
+	
 	/**
 	* Calls the xml file for creation
 	* 
@@ -29,8 +31,20 @@ public class ShishaList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
+		sbs = MainActivity.db.getAllShishaBrands();
+		shishaEntries = new String[sbs.size() + 1];
+		
+		for(int i = 0; i < sbs.size(); i++) {
+			Log.d("shishabrand name", "the name is :" + sbs.get(i).getName());
+			shishaEntries[i] = sbs.get(i).getName();
+		}
+		
 		int last = shishaEntries.length - 1;
 		shishaEntries[last] = getString(R.string.add_shisha);
+		
+		for(int i = 0; i < shishaEntries.length; i++) {
+			Log.d("shishaEntries","the element is: " + shishaEntries[i]);
+		}
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, shishaEntries);
 		setListAdapter(adapter);
 
@@ -54,6 +68,13 @@ public class ShishaList extends ListFragment {
 
 		if(position == shishaEntries.length - 1){
 			Intent intent = new Intent(getActivity().getApplicationContext(), AddNewShisha.class);
+			startActivity(intent);
+		} else {
+			int brandID = sbs.get(position).getId();
+			Log.d("brand_id", "the id is: " + brandID);
+			Intent intent = new Intent(getActivity().getApplicationContext(), ShishaFlavorActivity.class);
+			
+			intent.putExtra("brand_id", brandID);
 			startActivity(intent);
 		}
 	}

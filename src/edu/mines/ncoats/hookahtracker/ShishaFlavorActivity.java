@@ -1,9 +1,8 @@
 package edu.mines.ncoats.hookahtracker;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.view.View;
 
 public class ShishaFlavorActivity extends Activity {
 
+	static int brandID;
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
@@ -19,8 +19,9 @@ public class ShishaFlavorActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.shisha_flavor_list);
+		Intent intent = getIntent();
+		brandID = intent.getIntExtra("brand_id", 0);
 	}
 
 	
@@ -57,7 +58,7 @@ public class ShishaFlavorActivity extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-	public void add(View view) {
+	public void addShisha(View view) {
 		Intent intent = new Intent(this, AddNewFlavor.class);
 		startActivity(intent);
 	}

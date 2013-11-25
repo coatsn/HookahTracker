@@ -1,18 +1,18 @@
 package edu.mines.ncoats.hookahtracker;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class AddNewShisha extends Activity {
-
+	
+	private TextView name;
+	private String nText;
+	
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
@@ -22,8 +22,9 @@ public class AddNewShisha extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.new_shisha);
+		
+		name = (TextView)findViewById(R.id.shisha_brand_name_input);
 	}
 
 	
@@ -60,8 +61,12 @@ public class AddNewShisha extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-//	public void addShisha(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-//	}
+	public void addShisha(View view) {
+		nText = name.getText().toString();
+		ShishaBrand sb = new ShishaBrand(nText);
+		
+		MainActivity.db.createShishaBrand(sb);
+		Intent intent = new Intent(getApplicationContext(), ShishaActivity.class);
+		startActivity(intent);
+	}
 }

@@ -1,9 +1,9 @@
 package edu.mines.ncoats.hookahtracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -202,13 +202,93 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		return hookah;
 	}
-	
+
 	public void deleteHookah(Hookah hookah) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		db.delete(TABLE_HOOKAHS, KEY_NAME + " = ?", 
-		new String[] { hookah.getName() });
+				new String[] { hookah.getName() });
+	}
+
+	public void createShishaBrand(ShishaBrand sb) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, sb.getName());
+
+		db.insert(TABLE_SHISHA_BRANDS, null, values);
+	}
+
+	public ArrayList<ShishaBrand> getAllShishaBrands() {
+		ArrayList<ShishaBrand> shishaBrands = new ArrayList<ShishaBrand>();
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHA_BRANDS;
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				ShishaBrand sb = new ShishaBrand();
+				sb.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				sb.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+
+				shishaBrands.add(sb);
+
+			} while (c.moveToNext()) ;
 		}
+
+		Log.d("length log", "the length is: " + shishaBrands.size());
+		return shishaBrands;
+	}
+
+	public void createShisha(Shisha shisha) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, shisha.getName());
+		values.put(KEY_BRAND_ID, shisha.getBrandId());
+		values.put(KEY_GRAMS, shisha.getGrams());
+
+		db.insert(TABLE_SHISHAS, null, values);
+	}
+
+	public ArrayList<Shisha> getAllShishaFlavors(int brandId) {
+		ArrayList<Shisha> shishas = new ArrayList<Shisha>();
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS 
+				+ " WHERE " + KEY_BRAND_ID + " = '" 
+				+ brandId + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				Shisha shisha = new Shisha();
+				shisha.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				shisha.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+				shisha.setBrandId(c.getInt(c.getColumnIndex(KEY_BRAND_ID)));
+				shisha.setGrams(c.getInt(c.getColumnIndex(KEY_GRAMS)));
+
+				shishas.add(shisha);
+
+			} while (c.moveToNext()) ;
+		}
+
+		return shishas;
+	}
+
+	public void deleteShisha(Shisha shisha) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.delete(TABLE_SHISHAS, KEY_NAME + " = ?", 
+				new String[] { shisha.getName() });
+	}
 
 
 }

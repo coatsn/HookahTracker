@@ -1,18 +1,19 @@
 package edu.mines.ncoats.hookahtracker;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddNewFlavor extends Activity {
-
+	private EditText name, grams;
+	private String nText, gText;
+	int brandID;
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
@@ -22,8 +23,10 @@ public class AddNewFlavor extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.new_flavor);
+		brandID = ShishaFlavorActivity.brandID;
+		name = (EditText)findViewById(R.id.shisha_flavor_input);
+		grams = (EditText)findViewById(R.id.shisha_grams_input);
 	}
 
 	
@@ -60,8 +63,24 @@ public class AddNewFlavor extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-//	public void addShisha(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-//	}
+	public void addFlavor(View view) {
+		nText = name.getText().toString();
+		gText = grams.getText().toString();
+
+		int iGrams = 0;
+		try {
+			iGrams = Integer.parseInt(gText);
+		} catch(NumberFormatException e) {
+			Toast.makeText(this, "Please enter in an integer for grams",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		
+		Shisha shisha = new Shisha(nText, brandID, iGrams);
+		
+		MainActivity.db.createShisha(shisha);
+		Intent intent = new Intent(getApplicationContext(), ShishaFlavorActivity.class);
+		startActivity(intent);
+	}
 }

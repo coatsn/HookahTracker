@@ -1,9 +1,8 @@
 package edu.mines.ncoats.hookahtracker;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,7 +56,7 @@ public class ShishaActivity extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-	public void add(View view) {
+	public void addShisha(View view) {
 		Intent intent = new Intent(this, AddNewShisha.class);
 		startActivity(intent);
 	}

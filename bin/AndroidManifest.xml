@@ -83,6 +83,21 @@
             android:label="@string/app_name" >
         </activity>
         
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.ShishaFlavorActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.AddNewFlavor"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="edu.mines.ncoats.hookahtracker.ShishaFlavorInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
     </application>
 
 </manifest>
