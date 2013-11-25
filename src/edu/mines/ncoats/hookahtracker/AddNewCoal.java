@@ -36,8 +36,8 @@ public class AddNewCoal extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-	public void addCoal(View view) {
-		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-		toast.show();
-	}
+//	public void addCoal(View view) {
+//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
+//		toast.show();
+//	}
 }

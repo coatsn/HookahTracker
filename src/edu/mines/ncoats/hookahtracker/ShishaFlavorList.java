@@ -9,19 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class HookahList extends ListFragment {
-	
-	String[] hookahEntries = new String[] {
+public class ShishaFlavorList extends ListFragment {
+
+	String[] shishaFlavorEntries = new String[] {
 			"List Not Implemented",
-			"Add New Hookah"
-	};
-	
+			"Add New Flavor"};
 	
 
 	/**
@@ -34,8 +30,10 @@ public class HookahList extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, hookahEntries);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, shishaFlavorEntries);
 		setListAdapter(adapter);
+
+
 
 		return super.onCreateView(inflater, container, savedInstanceState);		
 	}
@@ -53,11 +51,12 @@ public class HookahList extends ListFragment {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 
-		if(position == hookahEntries.length - 1){
-			Intent intent = new Intent(getActivity().getApplicationContext(), AddNewHookah.class);
+		if(position == shishaFlavorEntries.length - 1){
+			Intent intent = new Intent(getActivity().getApplicationContext(), AddNewFlavor.class);
 			startActivity(intent);
 		}
 	}
+
 
 
 

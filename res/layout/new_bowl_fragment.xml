@@ -7,8 +7,8 @@
      <TextView
         android:id="@+id/hookah_bowl_text"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
         android:text="@string/bowl_name"
         android:textSize="24sp"
     />
@@ -16,16 +16,16 @@
      <EditText
         android:id="@+id/bowl_name_input"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
         android:textSize="24sp"
     />
      
      <TextView
         android:id="@+id/bowl_grams_text"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
         android:text="@string/bowl_grams"
         android:textSize="24sp"
     />
@@ -33,9 +33,18 @@
      <EditText
         android:id="@+id/bowl_grams_input"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
         android:textSize="24sp"
+    />
+     
+     <Button
+    	android:id="@+id/add_bowl"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:text="@string/add"
+    	android:textSize="24sp"
+    	android:onClick="addBowl"
     />
 
 </LinearLayout>

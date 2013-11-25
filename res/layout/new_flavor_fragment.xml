@@ -6,7 +6,7 @@
 
     
      <TextView
-        android:id="@+id/shisha_brand_name_text"
+        android:id="@+id/shisha_flavor_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
@@ -15,15 +15,15 @@
     />
      
      <EditText
-        android:id="@+id/shisha_brand_name_input"
+        android:id="@+id/shisha_flavor_input"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
         android:textSize="24sp"
     />
-
+     
      <Button
-    	android:id="@+id/add_new_shisha_brand"
+    	android:id="@+id/add_new_shisha_flavor"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
 
@@ -31,4 +31,5 @@
     	android:textSize="24sp"
     	android:onClick="addShisha"
     />
+
 </LinearLayout>

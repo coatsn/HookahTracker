@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class AddNewBowlFragment extends Fragment {
 
@@ -21,4 +22,9 @@ public class AddNewBowlFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.new_bowl_fragment, container, false);
     }
+    
+    public void addBowl(View view) {
+//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
+//		toast.show();
+	}
 }

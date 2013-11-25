@@ -37,8 +37,8 @@ public class AddNewBowl extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-	public void addBowl(View view) {
-		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-		toast.show();
-	}
+//	public void addBowl(View view) {
+//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
+//		toast.show();
+//	}
 }

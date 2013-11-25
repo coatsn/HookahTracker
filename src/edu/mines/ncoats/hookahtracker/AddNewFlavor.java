@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class AddNewShisha extends Activity {
+public class AddNewFlavor extends Activity {
 
 	/**
 	* Calls the xml file for creation and gets the intent.
@@ -21,7 +21,7 @@ public class AddNewShisha extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.new_shisha);
+		setContentView(R.layout.new_flavor);
 	}
 
 	

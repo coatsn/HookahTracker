@@ -1,27 +1,25 @@
 package edu.mines.ncoats.hookahtracker;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
-public class AddNewShisha extends Activity {
+
+public class ShishaFlavorActivity extends Activity {
 
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
 	* @param savedInstanceState, Retrieves app data
 	*/
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.new_shisha);
+		setContentView(R.layout.shisha_flavor_list);
 	}
 
 	
@@ -31,14 +29,14 @@ public class AddNewShisha extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	/**
-	* This will add a new brand of shisha to the list of different brands
+	* This will send the user to the AddNewShisha activity
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-//	public void addShisha(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-//	}
+	public void add(View view) {
+		Intent intent = new Intent(this, AddNewFlavor.class);
+		startActivity(intent);
+	}
 }

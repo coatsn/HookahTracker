@@ -1,6 +1,7 @@
 package edu.mines.ncoats.hookahtracker;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,7 +16,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class CoalsList extends ListFragment {
 
 	String[] coalEntries = new String[] {
-			"List Not Implemented"};
+			"List Not Implemented",
+			"Add New Coal"};
 
 	/**
 	* Calls the xml file for creation
@@ -49,16 +51,9 @@ public class CoalsList extends ListFragment {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 
-		switch(position) {
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-		default: 
-			Toast.makeText(getActivity(), "selected item :" + coalEntries[position],
-					Toast.LENGTH_LONG).show();
+		if(position == coalEntries.length - 1){
+			Intent intent = new Intent(getActivity().getApplicationContext(), AddNewCoal.class);
+			startActivity(intent);
 		}
 	}
 }

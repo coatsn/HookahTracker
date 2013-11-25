@@ -7,6 +7,7 @@
     <string name="test">testing</string>
     <string name="add_hookah">Add New Hookah</string>
     <string name="add_shisha">Add New Shisha</string>
+    <string name="add_flavor">Add New Flavor</string>
     <string name="add_bowl">Add New Bowl</string>
     <string name="add_coal">Add New Coals</string>
     <string name="hookah_name">Name</string>

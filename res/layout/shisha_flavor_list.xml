@@ -5,12 +5,21 @@
     android:orientation="vertical" >
 
     <fragment
-        android:id="@+id/coals_fragment"
-        android:name="edu.mines.ncoats.hookahtracker.CoalsList"
+        android:id="@+id/shisha_flavor_fragment"
+        android:name="edu.mines.ncoats.hookahtracker.ShishaFlavorList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="4" />
     
+     <Button
+    	android:id="@+id/new_flavor_entry"
+    	android:layout_width="fill_parent"
+    	android:layout_height="30dp"
+    	android:layout_weight="1"
+    	android:text="@string/add_flavor"
+    	android:textSize="24sp"
+    	android:onClick="add"
+    />
 
 
 </LinearLayout>
