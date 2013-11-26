@@ -15,9 +15,7 @@ public class HookahList extends ListFragment {
 	
 	
 	String[] hookahEntries;
-	private boolean isChoosing = false;
 	
-
 	/**
 	* Calls the xml file for creation
 	* 

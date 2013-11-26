@@ -3,13 +3,9 @@ package edu.mines.ncoats.hookahtracker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class SettingsActivity extends Activity {
 
@@ -63,5 +59,11 @@ public class SettingsActivity extends Activity {
 	
 	public void clearStats(View view) {
 		MainActivity.db.clearStatistics();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		startActivity(intent);
 	}
 }

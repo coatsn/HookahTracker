@@ -1,22 +1,23 @@
 package edu.mines.ncoats.hookahtracker;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
+@SuppressLint("DefaultLocale")
 public class StatisticsActivity extends Activity {
 
-	private TextView avCoals, avShisha, favHookah, favShisha, numSessions;
+	private TextView avCoals, avShisha, favHookah, numSessions;
 	/**
 	 * Calls the xml file for creation and gets the intent.
 	 * 
 	 * @param savedInstanceState, Retrieves app data
 	 */
+	@SuppressLint("DefaultLocale")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,15 +40,14 @@ public class StatisticsActivity extends Activity {
 		
 		String averageCoals = String.format("%.2f", MainActivity.db.getAverageCoals());
 		String averageShisha = String.format("%.2f", MainActivity.db.getAverageShisha());
-//		Log.d("formatted text:", averageCoals);
+
 		avCoals.setText(averageCoals + " coals");
 		avShisha.setText(averageShisha + " grams");
 		numSessions.setText(MainActivity.db.getNumSessions() + " sessions");
 		String favoriteHookah = MainActivity.db.getFavoriteHookah();
-		String favoriteShisha = MainActivity.db.getFavoriteShisha();
 		favHookah.setText(favoriteHookah);
-	//	favShisha.setText(favoriteShisha);
-//		Log.d("my favorite hookah is: ", favoriteHookah + "awfasdf");
+		//hello
+
 	}
 
 
@@ -75,5 +75,10 @@ public class StatisticsActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+		startActivity(intent);
+	}
 
 }

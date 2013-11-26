@@ -2,7 +2,6 @@ package edu.mines.ncoats.hookahtracker;
 
 import java.util.ArrayList;
 
-import android.R.bool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,23 +9,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.app.ListActivity;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class SessionActivity extends Activity {
-	private boolean isChoosing = true;
+
 	private int iCoals;
 	private EditText numCoals;
 	private Spinner hookahSpin, shishaSpin, coalSpin, bowlSpin;
 	private String hookahEntries[], shishaEntries[], coalEntries[], bowlEntries[], hookahName, coalName, bowlName, shishaName;
-	private int hookahId, shishaId, coalId, bowlId;
+	private int hookahId, shishaId, bowlId;
 	private boolean noHookah, noShisha, noBowl, noCoals;
 	/**
 	 * Calls the xml file for creation and gets the intent.
@@ -225,7 +220,7 @@ public class SessionActivity extends Activity {
 
 		hookahId = MainActivity.db.getHookahIdFromName(hookahName);
 		shishaId = MainActivity.db.getShishaIdFromName(shishaName);
-		coalId = MainActivity.db.getCoalIdFromName(coalName);
+//		coalId = MainActivity.db.getCoalIdFromName(coalName);
 		bowlId = MainActivity.db.getBowlIdFromName(bowlName);
 
 		Session session = new Session(hookahId, bowlId, shishaId, iCoals, MainActivity.db.getDateTime(), coalName);
