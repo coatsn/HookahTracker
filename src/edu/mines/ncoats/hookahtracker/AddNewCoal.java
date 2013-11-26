@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddNewCoal extends Activity {
 
+	private EditText name, number;
+	private String nText, numText;
 	/**
 	* Calls the xml file for creation and gets the intent.
 	* 
@@ -16,8 +21,10 @@ public class AddNewCoal extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.new_coal);
+		
+		name = (EditText)findViewById(R.id.coal_name_input);
+		number = (EditText)findViewById(R.id.coal_number_input);
 	}
 
 	
@@ -54,8 +61,23 @@ public class AddNewCoal extends Activity {
 	* 
 	* @param view Allows the view to interact with the app
 	*/
-//	public void addCoal(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-//	}
+	public void addCoal(View view) {
+		nText = name.getText().toString();
+		numText = number.getText().toString();
+		int iNum = 0;
+		try {
+			iNum = Integer.parseInt(numText);
+		} catch(NumberFormatException e) {
+			Toast.makeText(this, "Please enter an integer for number",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		
+		Coal coal = new Coal(nText, iNum);
+		
+		MainActivity.db.createCoal(coal);
+		Intent intent = new Intent(getApplicationContext(), CoalsActivity.class);
+		startActivity(intent);
+	}
 }

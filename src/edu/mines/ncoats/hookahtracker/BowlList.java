@@ -1,8 +1,11 @@
 package edu.mines.ncoats.hookahtracker;
 
+import java.util.ArrayList;
+
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,11 @@ import android.widget.ListView;
 
 public class BowlList extends ListFragment {
 
-	String[] bowlEntries = new String[] {
-			"List Not Implemented",
-			""
-			};
-	
+//	String[] bowlEntries = new String[] {
+//			"List Not Implemented",
+//			""
+//			};
+	String [] bowlEntries;
 
 	/**
 	* Calls the xml file for creation
@@ -26,6 +29,14 @@ public class BowlList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
+		ArrayList<Bowl> bowls = MainActivity.db.getAllBowls();
+		Log.d("length of bowl array", "the length is: " + bowls.size());
+		bowlEntries = new String[bowls.size() + 1];
+		
+		for(int i = 0; i < bowls.size(); i++) {
+			bowlEntries[i] = bowls.get(i).getSize() + " gram " + bowls.get(i).getName();
+		}
+		
 		int last = bowlEntries.length - 1;
 		bowlEntries[last] = getString(R.string.add_bowl);
 		

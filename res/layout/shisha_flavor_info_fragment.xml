@@ -29,5 +29,66 @@
         android:layout_height = "1dp"
 
     />
+    
+    
+    
+    <TextView
+        android:id="@+id/shisha_flavor_name_info_text"
+        android:layout_width="fill_parent"
+        android:layout_height="48sp"
+		android:text="@string/shisha_flavor"
+        android:textSize="24sp"
+
+    />
+    
+
+    <TextView
+        android:id="@+id/shisha_flavor_name_info"
+        android:layout_width="fill_parent"
+        android:layout_height="48sp"
+
+        android:textSize="24sp"
+
+    />
+    
+    <View
+        android:background="#3d3d3d"
+        android:layout_width="fill_parent"
+        android:layout_height = "1dp"
+
+    />
+    
+    <TextView
+        android:id="@+id/shisha_flavor_grams_info_text"
+        android:layout_width="fill_parent"
+        android:layout_height="48sp"
+		android:text="@string/shisha_grams"
+        android:textSize="24sp"
+
+    />
+    
+
+    <TextView
+        android:id="@+id/shisha_flavor_grams_info"
+        android:layout_width="fill_parent"
+        android:layout_height="48sp"
+
+        android:textSize="24sp"
+
+    />
+    
+    <Button
+    	android:id="@+id/delete_shisha_entry"
+    	android:layout_width="fill_parent"
+    	android:layout_height="48sp"
+    	android:text="@string/delete_shisha"
+    	android:textSize="24sp"
+    	android:onClick="deleteShisha"
+
+    />
+    
+
+    
+    
 
 </LinearLayout>

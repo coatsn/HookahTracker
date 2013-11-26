@@ -126,7 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	// From: http://www.androidhive.info/2013/09/android-sqlite-database-with-multiple-tables/
-	private String getDateTime() {
+	public String getDateTime() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 		Date date = new Date();
@@ -288,6 +288,293 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		db.delete(TABLE_SHISHAS, KEY_NAME + " = ?", 
 				new String[] { shisha.getName() });
+	}
+
+	public Shisha getShishaByName(String name) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS + " WHERE "
+				+ KEY_NAME + " = '" + name + "'";
+
+		Log.e(LOG, selectQuery);
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		Shisha shisha = new Shisha();
+		shisha.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+		shisha.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+		shisha.setBrandId(c.getInt(c.getColumnIndex(KEY_BRAND_ID)));
+		shisha.setGrams(c.getInt(c.getColumnIndex(KEY_GRAMS)));
+
+		return shisha;
+	}
+
+	public String getBrandName(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHA_BRANDS
+				+ " WHERE " + KEY_ID + " = '" + id + "'";
+
+		Log.e(LOG, selectQuery);
+
+		Cursor c = db.rawQuery(selectQuery, null);
+		if(c != null) {
+			c.moveToFirst();
+		}
+
+		return c.getString(c.getColumnIndex(KEY_NAME));
+	}
+
+	public ArrayList<Bowl> getAllBowls() {
+		ArrayList<Bowl> bowls = new ArrayList<Bowl>();
+		String selectQuery = "SELECT * FROM " + TABLE_BOWLS;
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				Bowl bowl = new Bowl();
+				bowl.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				bowl.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+				bowl.setSize(c.getInt(c.getColumnIndex(KEY_SIZE)));
+
+				bowls.add(bowl);
+
+			} while (c.moveToNext()) ;
+		}
+
+		return bowls;
+	}
+
+	public void createBowl(Bowl bowl) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, bowl.getName());
+		values.put(KEY_SIZE, bowl.getSize());
+
+		db.insert(TABLE_BOWLS, null, values);
+	}
+
+	public void deleteShishaFlavor(Shisha shisha) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.delete(TABLE_SHISHAS, KEY_NAME + " = ?", 
+				new String[] { shisha.getName() });
+	}
+
+	public ArrayList<Coal> getAllCoals() {
+		ArrayList<Coal> coals = new ArrayList<Coal>();
+		String selectQuery = "SELECT * FROM " + TABLE_COALS;
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				Coal coal = new Coal();
+				coal.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				coal.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+				coal.setNum(c.getInt(c.getColumnIndex(KEY_NUM)));
+
+				coals.add(coal);
+
+			} while (c.moveToNext()) ;
+		}
+
+		return coals;
+	}
+
+	public void createCoal(Coal coal) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, coal.getName());
+		values.put(KEY_NUM, coal.getNum());
+
+		db.insert(TABLE_COALS, null, values);
+	}
+
+	public void deleteCoal(Coal coal) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		db.delete(TABLE_COALS, KEY_NAME + " = ?", 
+				new String[] { coal.getName() });
+	}
+
+	public String getHookahFromSession(Session session) {
+		String selectQuery = "SELECT * FROM " + TABLE_HOOKAHS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ session.getHookahId();
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getString(c.getColumnIndex(KEY_NAME));
+	}
+
+	public String getBowlFromSession(Session session) {
+		String selectQuery = "SELECT * FROM " + TABLE_BOWLS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ session.getBowlId();
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getString(c.getColumnIndex(KEY_NAME));
+	}
+
+	public String getShishaFromSession(Session session) {
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ session.getBowlId();
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getString(c.getColumnIndex(KEY_NAME));
+	}
+
+	public ArrayList<Shisha> getAllFlavors() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS;
+
+		ArrayList<Shisha> shishas = new ArrayList<Shisha>();
+
+		Log.e(LOG, selectQuery, null);
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				Shisha shisha = new Shisha();
+				shisha.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				shisha.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+				shisha.setBrandId(c.getInt(c.getColumnIndex(KEY_BRAND_ID)));
+				shisha.setGrams(c.getInt(c.getColumnIndex(KEY_GRAMS)));
+
+				shishas.add(shisha);
+
+			} while (c.moveToNext()) ;
+		}
+
+		return shishas;
+	}
+
+	public void createSession(Session session) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_HOOKAH_ID, session.getHookahId());
+		values.put(KEY_BOWL_ID, session.getBowlId());
+		values.put(KEY_SHISHA_ID, session.getShishaId());
+		values.put(KEY_NUM_COALS, session.getNumCoals());
+		values.put(KEY_DATE, session.getDate());
+
+
+		db.insert(TABLE_SESSIONS, null, values);
+	}
+
+	public int numCoalsFromName(String name) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String selectQuery = "SELECT * FROM " + TABLE_COALS
+				+ " WHERE " + KEY_NAME + " = '"
+				+ name + "'";
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_NUM));
+	}
+
+	public int getShishaIdFromName(String name) {
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS
+				+ " WHERE " + KEY_NAME + " = '" 
+				+ name + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+				if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_ID));
+	}
+
+	public int getBowlIdFromName(String name) {
+		String selectQuery = "SELECT * FROM " + TABLE_BOWLS
+				+ " WHERE " + KEY_NAME + " = '" 
+				+ name + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+				if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_ID));
+	}
+
+	public int getCoalIdFromName(String name) {
+		String selectQuery = "SELECT * FROM " + TABLE_COALS
+				+ " WHERE " + KEY_NAME + " = '" 
+				+ name + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+				if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_ID));
+	}
+	
+	public int getHookahIdFromName(String name) {
+		String selectQuery = "SELECT * FROM " + TABLE_HOOKAHS
+				+ " WHERE " + KEY_NAME + " = '" 
+				+ name + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+				if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_ID));
 	}
 
 

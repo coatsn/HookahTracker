@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
-        android:text="@string/shisha_brand"
+        android:text="@string/shisha_flavor"
         android:textSize="24sp"
     />
      

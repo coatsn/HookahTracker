@@ -1,5 +1,7 @@
 package edu.mines.ncoats.hookahtracker;
 
+import java.util.ArrayList;
+
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +13,13 @@ import android.widget.ListView;
 
 public class CoalsList extends ListFragment {
 
-	String[] coalEntries = new String[] {
-			"List Not Implemented",
-			""
-			};
-
+//	String[] coalEntries = new String[] {
+//			"List Not Implemented",
+//			""
+//			};
+	
+	String[] coalEntries;
+	
 	/**
 	* Calls the xml file for creation
 	* 
@@ -25,6 +29,13 @@ public class CoalsList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
+		ArrayList<Coal> coals = MainActivity.db.getAllCoals();
+		coalEntries = new String[coals.size() + 1];
+		
+		for(int i = 0; i < coals.size(); i++) {
+			coalEntries[i] = coals.get(i).getNum() + " " + coals.get(i).getName();
+		}
+		
 		int last = coalEntries.length - 1;
 		coalEntries[last] = getString(R.string.add_coal);
 		

@@ -22,13 +22,5 @@ public class AddNewHookahFragment extends Fragment {
         return inflater.inflate(R.layout.new_hookah_fragment, container, false);
     }
     
-    public void takePicture(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-	}
-    
-    public void addHookah(View view) {
-//		Toast toast = Toast.makeText(getApplicationContext(), "Not Implemented", Toast.LENGTH_SHORT);
-//		toast.show();
-	}
+
 }

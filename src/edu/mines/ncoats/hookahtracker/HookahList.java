@@ -15,7 +15,7 @@ public class HookahList extends ListFragment {
 	
 	
 	String[] hookahEntries;
-	
+	private boolean isChoosing = false;
 	
 
 	/**
@@ -29,7 +29,6 @@ public class HookahList extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
 		ArrayList<Hookah> temp = MainActivity.db.getAllHookahs();
 		hookahEntries = new String[temp.size() + 1];
-		
 		for(int i = 0; i < temp.size(); i++) {
 			hookahEntries[i] = temp.get(i).name;
 		}

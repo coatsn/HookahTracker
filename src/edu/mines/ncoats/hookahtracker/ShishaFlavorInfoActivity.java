@@ -5,13 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
 public class ShishaFlavorInfoActivity extends Activity {
-	private String sName;
-	private ShishaBrand sb;
-	private TextView name;
+	private String bName, sName;
+	private int iGrams;
+	private Shisha shisha;
+	private TextView brandName, flavorName, grams;
 	
 	/**
 	* Calls the xml file for creation and gets the intent.
@@ -23,14 +25,19 @@ public class ShishaFlavorInfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shisha_flavor_info);
 		Intent intent = getIntent();
-//		hName = intent.getStringExtra("hookah_name");
-//		hookah = MainActivity.db.getHookahByName(hName);
-//		
-//		
-//		
-//		name = (TextView)findViewById(R.id.hookah_name_info);
-//		
-//		name.setText(hookah.getName());
+		sName = intent.getStringExtra("shisha_name");
+		shisha = MainActivity.db.getShishaByName(sName);
+		bName = MainActivity.db.getBrandName(shisha.getBrandId());
+		iGrams = shisha.getGrams();
+		
+		brandName = (TextView)findViewById(R.id.shisha_flavor_info);
+		flavorName = (TextView)findViewById(R.id.shisha_flavor_name_info);
+		grams = (TextView)findViewById(R.id.shisha_flavor_grams_info);
+		
+		brandName.setText(bName);
+		flavorName.setText(sName);
+		grams.setText(iGrams + "");
+
 		
 	}
 
@@ -61,6 +68,12 @@ public class ShishaFlavorInfoActivity extends Activity {
 	    	break;
 	    }
 	    return true;
+	}
+	
+	public void deleteShisha(View view) {
+		MainActivity.db.deleteShisha(shisha);
+		Intent intent = new Intent(getApplicationContext(), ShishaFlavorActivity.class);
+		startActivity(intent);
 	}
 	
 }

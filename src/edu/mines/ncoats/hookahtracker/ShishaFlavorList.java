@@ -68,6 +68,8 @@ public class ShishaFlavorList extends ListFragment {
 			startActivity(intent);
 		} else {
 			Intent intent = new Intent(getActivity().getApplicationContext(), ShishaFlavorInfoActivity.class);
+			String shishaName = shish.get(position).getName();
+			intent.putExtra("shisha_name", shishaName);
 			startActivity(intent);
 		}
 	}
