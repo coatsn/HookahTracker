@@ -63,7 +63,7 @@ public class MainMenu extends ListFragment {
 			intent = new Intent(getActivity().getApplicationContext(), CoalsActivity.class);
 			startActivity(intent);
 			break;
-		case 5:
+		case 4:
 			intent = new Intent(getActivity().getApplicationContext(), SessionActivity.class);
 			startActivity(intent);
 			break;

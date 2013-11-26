@@ -31,8 +31,10 @@ public class ShishaFlavorList extends ListFragment {
 	*/
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
-		shish = MainActivity.db.getAllShishaFlavors(ShishaFlavorActivity.brandID);
-		Log.d("in the list", "in the list, the brandID is: " + ShishaFlavorActivity.brandID);
+		Intent intent = getActivity().getIntent();
+		int brandID = intent.getIntExtra("real_brand_id", 0);
+		shish = MainActivity.db.getAllShishaFlavors(brandID);
+		Log.d("in the list", "in the list, the brandID is: " + brandID);
 		shishaFlavorEntries = new String[shish.size() + 1];
 		
 		for(int i = 0; i < shish.size(); i++) {

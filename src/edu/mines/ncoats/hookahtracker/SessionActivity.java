@@ -29,167 +29,186 @@ public class SessionActivity extends Activity {
 	private int hookahId, shishaId, coalId, bowlId;
 	private boolean noHookah, noShisha, noBowl, noCoals;
 	/**
-	* Calls the xml file for creation and gets the intent.
-	* 
-	* @param savedInstanceState, Retrieves app data
-	*/
+	 * Calls the xml file for creation and gets the intent.
+	 * 
+	 * @param savedInstanceState, Retrieves app data
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_session);
-		
+
+		if(MainActivity.isTablet) {
+			setContentView(R.layout.activity_main_menu_session);
+		} else {
+			setContentView(R.layout.activity_session);
+		}
+
 		numCoals = (EditText) findViewById(R.id.coal_number_input);
-		
-		
+
+
 		ArrayList<Hookah> hookahs = MainActivity.db.getAllHookahs();
 		ArrayList<Shisha> shishas = MainActivity.db.getAllFlavors();
 		Log.d("length of flavors", "flavors: " + shishas.size());
 		ArrayList<Coal> coals = MainActivity.db.getAllCoals();
 		ArrayList<Bowl> bowls = MainActivity.db.getAllBowls();
-		
-		hookahEntries = new String[hookahs.size()];
-		shishaEntries = new String[shishas.size()];
-		coalEntries = new String[coals.size()];
-		bowlEntries = new String[bowls.size()];
-		
-		for(int i = 0; i < hookahs.size(); i++) {
-			hookahEntries[i] = hookahs.get(i).getName();
-		}
-		
-		for(int i = 0; i < shishas.size(); i++) {
-			shishaEntries[i] = shishas.get(i).getName();
-		}
-		
-		for(int i = 0; i < coals.size(); i++) {
-			coalEntries[i] = coals.get(i).getName();
-		}
-		
-		for(int i = 0; i < bowls.size(); i++) {
-			bowlEntries[i] = bowls.get(i).getName();
-		}
-		
-		
-		
-		hookahSpin = (Spinner) findViewById(R.id.choose_hookah);
-		shishaSpin = (Spinner) findViewById(R.id.choose_shisha);
-		coalSpin = (Spinner) findViewById(R.id.choose_coals);
-		bowlSpin = (Spinner) findViewById(R.id.choose_bowl);
-		
-		ArrayAdapter<String> hookAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hookahEntries);
-		// Specify the layout to use when the list of choices appears
-		hookAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		hookahSpin.setAdapter(hookAdapter);
-		
-		ArrayAdapter<String> shishAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, shishaEntries);
-		// Specify the layout to use when the list of choices appears
-		shishAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		shishaSpin.setAdapter(shishAdapter);
-		
-		ArrayAdapter<String> coalAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, coalEntries);
-		// Specify the layout to use when the list of choices appears
-		coalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		coalSpin.setAdapter(coalAdapter);
-		
-		ArrayAdapter<String> bowlAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bowlEntries);
-		// Specify the layout to use when the list of choices appears
-		bowlAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply the adapter to the spinner
-		bowlSpin.setAdapter(bowlAdapter);
-		
-		
-		
-		
-		hookahSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-		    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
-		        noHookah = false;
-		        hookahName = hookahEntries[i];
-		        Log.d("hookah name", "the hookah name is:" + hookahName);
-		    } 
 
-		    public void onNothingSelected(AdapterView<?> adapterView) {
-		    	noHookah = true;
-		        return;
-		    } 
-		}); 
-		
-		shishaSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-		    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
-		        noShisha = false;
-		        shishaName = shishaEntries[i];
-		        Log.d("shisha name", "the shisha name is:" + shishaName);
-		    } 
 
-		    public void onNothingSelected(AdapterView<?> adapterView) {
-		    	noShisha = true;
-		        return;
-		    } 
-		}); 
-		
-		coalSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-		    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
-		        noCoals = false;
-		        coalName = coalEntries[i];
-		        Log.d("coal name", "the coal name is:" + coalName);
-		    } 
 
-		    public void onNothingSelected(AdapterView<?> adapterView) {
-		    	noCoals = true;
-		        return;
-		    } 
-		}); 
-		
-		bowlSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-		    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
-		        noBowl = false;
-		        bowlName = bowlEntries[i];
-		        Log.d("bowl name", "the bowl name is:" + bowlName);
-		    } 
+		if(hookahs.size() > 0 && shishas.size() > 0 && coals.size() > 0 && bowls.size() > 0) {
+			hookahEntries = new String[hookahs.size()];
+			shishaEntries = new String[shishas.size()];
+			coalEntries = new String[coals.size()];
+			bowlEntries = new String[bowls.size()];
 
-		    public void onNothingSelected(AdapterView<?> adapterView) {
-		    	noBowl = true;
-		        return;
-		    } 
-		}); 
-		
+			for(int i = 0; i < hookahs.size(); i++) {
+				hookahEntries[i] = hookahs.get(i).getName();
+			}
+
+			for(int i = 0; i < shishas.size(); i++) {
+				shishaEntries[i] = shishas.get(i).getName();
+			}
+
+			for(int i = 0; i < coals.size(); i++) {
+				coalEntries[i] = coals.get(i).getName();
+			}
+
+			for(int i = 0; i < bowls.size(); i++) {
+				bowlEntries[i] = bowls.get(i).getName();
+			}
+
+			hookahSpin = (Spinner) findViewById(R.id.choose_hookah);
+			shishaSpin = (Spinner) findViewById(R.id.choose_shisha);
+			coalSpin = (Spinner) findViewById(R.id.choose_coals);
+			bowlSpin = (Spinner) findViewById(R.id.choose_bowl);
+
+			ArrayAdapter<String> hookAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hookahEntries);
+			// Specify the layout to use when the list of choices appears
+			hookAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			// Apply the adapter to the spinner
+			hookahSpin.setAdapter(hookAdapter);
+
+			ArrayAdapter<String> shishAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, shishaEntries);
+			// Specify the layout to use when the list of choices appears
+			shishAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			// Apply the adapter to the spinner
+			shishaSpin.setAdapter(shishAdapter);
+
+			ArrayAdapter<String> coalAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, coalEntries);
+			// Specify the layout to use when the list of choices appears
+			coalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			// Apply the adapter to the spinner
+			coalSpin.setAdapter(coalAdapter);
+
+			ArrayAdapter<String> bowlAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bowlEntries);
+			// Specify the layout to use when the list of choices appears
+			bowlAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			// Apply the adapter to the spinner
+			bowlSpin.setAdapter(bowlAdapter);
+
+
+
+
+			hookahSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
+					noHookah = false;
+					hookahName = hookahEntries[i];
+					Log.d("hookah name", "the hookah name is:" + hookahName);
+				} 
+
+				public void onNothingSelected(AdapterView<?> adapterView) {
+					noHookah = true;
+					return;
+				} 
+			}); 
+
+			shishaSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
+					noShisha = false;
+					shishaName = shishaEntries[i];
+					Log.d("shisha name", "the shisha name is:" + shishaName);
+				} 
+
+				public void onNothingSelected(AdapterView<?> adapterView) {
+					noShisha = true;
+					return;
+				} 
+			}); 
+
+			coalSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
+					noCoals = false;
+					coalName = coalEntries[i];
+					Log.d("coal name", "the coal name is:" + coalName);
+				} 
+
+				public void onNothingSelected(AdapterView<?> adapterView) {
+					noCoals = true;
+					return;
+				} 
+			}); 
+
+			bowlSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) { 
+					noBowl = false;
+					bowlName = bowlEntries[i];
+					Log.d("bowl name", "the bowl name is:" + bowlName);
+				} 
+
+				public void onNothingSelected(AdapterView<?> adapterView) {
+					noBowl = true;
+					return;
+				} 
+			}); 
+		} else {
+			Toast.makeText(this, "Please add equipment into each category before starting a session.",
+					Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intent);
+		}
+
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
-	    switch(item.getItemId()) {
-	    case R.id.action_settings:
-	    	Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+		switch(item.getItemId()) {
+		case R.id.action_settings:
+			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
 			startActivity(intent);
-	        break;
-	    case R.id.action_about:
-	    	new AboutDialog().show(getFragmentManager(), "AboutDialog");
-	        break;
-	    case R.id.action_help:
-	    	new HelpDialog().show(getFragmentManager(), "HelpDialog");
-	    	break;
-	    case R.id.action_statistics:
-	    	Intent intent2 = new Intent(getApplicationContext(), StatisticsActivity.class);
+			break;
+		case R.id.action_about:
+			new AboutDialog().show(getFragmentManager(), "AboutDialog");
+			break;
+		case R.id.action_help:
+			new HelpDialog().show(getFragmentManager(), "HelpDialog");
+			break;
+		case R.id.action_statistics:
+			Intent intent2 = new Intent(getApplicationContext(), StatisticsActivity.class);
 			startActivity(intent2);
-	    	break;
-	    }
-	    return true;
+			break;
+		}
+		return true;
 	}
 
-	
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	
+
+
 	public void startSession(View view) {
+		if(noHookah || noShisha || noBowl || noCoals) {
+			Toast.makeText(this, "Please select a hookah, shisha, bowl, and coal.",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
 		int totalCoals = MainActivity.db.numCoalsFromName(coalName);
 		iCoals = 0;
+
+
 		try {
 			iCoals = Integer.parseInt(numCoals.getText().toString());
 		} catch(NumberFormatException e) {
@@ -197,21 +216,23 @@ public class SessionActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		
+
 		if(iCoals > totalCoals) {
 			Toast.makeText(this, "There are not enough coals of your selected type.",
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		
+
 		hookahId = MainActivity.db.getHookahIdFromName(hookahName);
 		shishaId = MainActivity.db.getShishaIdFromName(shishaName);
 		coalId = MainActivity.db.getCoalIdFromName(coalName);
 		bowlId = MainActivity.db.getBowlIdFromName(bowlName);
-		
-		Session session = new Session(hookahId, bowlId, shishaId, coalId, MainActivity.db.getDateTime());
-		
+
+		Session session = new Session(hookahId, bowlId, shishaId, iCoals, MainActivity.db.getDateTime(), coalName);
+
 		MainActivity.db.createSession(session);
-		
+		Log.d("checked", "a session was created");
+
+
 	}
 }

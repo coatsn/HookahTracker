@@ -8,6 +8,7 @@ public class Session {
 	int shishaId;
 	int numCoals;
 	String date;
+	String coalType;
 
 	//Constructors
 
@@ -15,12 +16,13 @@ public class Session {
 
 	}
 
-	public Session(int hookahId, int bowlId, int shishaId, int numCoals, String date) {
+	public Session(int hookahId, int bowlId, int shishaId, int numCoals, String date, String coalType) {
 		this.hookahId = hookahId;
 		this.bowlId = bowlId;
 		this.shishaId = shishaId;
 		this.numCoals = numCoals;
 		this.date = date;
+		this.coalType = coalType;
 	}
 
 	//Setters
@@ -48,6 +50,10 @@ public class Session {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+	public void setCoalType(String coalType) {
+		this.coalType = coalType;
+	}
 
 	//Getters
 
@@ -73,6 +79,10 @@ public class Session {
 
 	public String getDate() {
 		return this.date;
+	}
+	
+	public String getCoalType() {
+		return this.coalType;
 	}
 
 }

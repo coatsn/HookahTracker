@@ -3,6 +3,7 @@ package edu.mines.ncoats.hookahtracker;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.content.ContentValues;
@@ -56,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String KEY_SHISHA_ID = "shisha_id";
 	private static final String KEY_NUM_COALS = "num_coals";
 	private static final String KEY_DATE = "date";
+	private static final String KEY_COAL_TYPE = "coal_type";
 
 	private static final String CREATE_TABLE_HOOKAHS = "CREATE TABLE IF NOT EXISTS "
 			+ TABLE_HOOKAHS + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -87,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 			+ KEY_HOOKAH_ID + " INTEGER," + KEY_BOWL_ID + " INTEGER,"
 			+ KEY_SHISHA_ID + " INTEGER," + KEY_NUM_COALS + " INTEGER,"
-			+ KEY_DATE + " DATETIME" + ")";
+			+ KEY_DATE + " DATETIME," + KEY_COAL_TYPE + " TEXT)";
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -414,7 +416,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public String getHookahFromSession(Session session) {
 		String selectQuery = "SELECT * FROM " + TABLE_HOOKAHS
 				+ " WHERE " + KEY_ID + " = '" 
-				+ session.getHookahId();
+				+ session.getHookahId() + "'";
 
 		Log.e(LOG, selectQuery, null);
 
@@ -427,26 +429,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return c.getString(c.getColumnIndex(KEY_NAME));
 	}
 
-	public String getBowlFromSession(Session session) {
-		String selectQuery = "SELECT * FROM " + TABLE_BOWLS
-				+ " WHERE " + KEY_ID + " = '" 
-				+ session.getBowlId();
-
-		Log.e(LOG, selectQuery, null);
-
-		SQLiteDatabase db = this.getReadableDatabase();
-
-		Cursor c = db.rawQuery(selectQuery, null);
-
-		if (c != null) c.moveToFirst();
-
-		return c.getString(c.getColumnIndex(KEY_NAME));
-	}
 
 	public String getShishaFromSession(Session session) {
 		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS
 				+ " WHERE " + KEY_ID + " = '" 
-				+ session.getBowlId();
+				+ session.getShishaId() + "'";
 
 		Log.e(LOG, selectQuery, null);
 
@@ -490,14 +477,105 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NUM_COALS, session.getNumCoals());
 		values.put(KEY_HOOKAH_ID, session.getHookahId());
 		values.put(KEY_BOWL_ID, session.getBowlId());
 		values.put(KEY_SHISHA_ID, session.getShishaId());
+		values.put(KEY_NUM_COALS, session.getNumCoals());
 		values.put(KEY_DATE, session.getDate());
+		values.put(KEY_COAL_TYPE, session.getCoalType());
 
+		int bowlGrams = getBowlSizeFromID(session.getBowlId());
+		int shishaGrams = getShishaGramsFromID(session.getShishaId());
+		int coalAmount = numCoalsFromName(session.getCoalType());
+		int newShishaGrams = shishaGrams - bowlGrams;
+		int coalsUsed = session.getNumCoals();
+
+		if (newShishaGrams > 0) {
+			String updateStatement = "UPDATE " + TABLE_SHISHAS
+					+ " SET " + KEY_GRAMS + " = '" + newShishaGrams
+					+ "' WHERE " + KEY_ID + " = '" + session.getShishaId()
+					+ "'";
+
+			Log.e(LOG, updateStatement, null);
+
+			db.execSQL(updateStatement);
+		} else {
+			String deleteStatement = "DELETE FROM " + TABLE_SHISHAS
+					+ " WHERE " + KEY_ID + " = '" + session.getShishaId() 
+					+ "'";
+			db.execSQL(deleteStatement);
+		}
+
+		int newCoalAmount = coalAmount - coalsUsed;
+
+		if (newCoalAmount > 0) {
+			String updateStatement = "UPDATE " + TABLE_COALS
+					+ " SET " + KEY_NUM + " = '" + newCoalAmount
+					+ "' WHERE " + KEY_NAME + " = '" + session.getCoalType()
+					+ "'";
+
+			Log.e(LOG, updateStatement, null);
+
+			db.execSQL(updateStatement);
+		} else {
+			String deleteStatement = "DELETE FROM " + TABLE_COALS
+					+ " WHERE " + KEY_NAME + " = '" + session.getCoalType()
+					+ "'";
+
+			Log.e(LOG, deleteStatement, null);
+
+			db.execSQL(deleteStatement);
+		}
 
 		db.insert(TABLE_SESSIONS, null, values);
+	}
+
+	public int getBowlSizeFromID(int bowlID) {
+		String selectQuery = "SELECT * FROM " + TABLE_BOWLS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ bowlID + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_SIZE));
+	}
+
+	public int getShishaGramsFromID(int id) {
+		String selectQuery = "SELECT * FROM " + TABLE_SHISHAS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ id + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_GRAMS));
+	}
+
+	public int getCoalNumberFromID(int id) {
+		String selectQuery = "SELECT * FROM " + TABLE_COALS
+				+ " WHERE " + KEY_ID + " = '" 
+				+ id + "'";
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c != null) c.moveToFirst();
+
+		return c.getInt(c.getColumnIndex(KEY_NUM));
 	}
 
 	public int numCoalsFromName(String name) {
@@ -524,7 +602,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Cursor c = db.rawQuery(selectQuery, null);
 
-				if (c != null) c.moveToFirst();
+		if (c != null) c.moveToFirst();
 
 		return c.getInt(c.getColumnIndex(KEY_ID));
 	}
@@ -540,7 +618,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Cursor c = db.rawQuery(selectQuery, null);
 
-				if (c != null) c.moveToFirst();
+		if (c != null) c.moveToFirst();
 
 		return c.getInt(c.getColumnIndex(KEY_ID));
 	}
@@ -556,11 +634,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Cursor c = db.rawQuery(selectQuery, null);
 
-				if (c != null) c.moveToFirst();
+		if (c != null) c.moveToFirst();
 
 		return c.getInt(c.getColumnIndex(KEY_ID));
 	}
-	
+
 	public int getHookahIdFromName(String name) {
 		String selectQuery = "SELECT * FROM " + TABLE_HOOKAHS
 				+ " WHERE " + KEY_NAME + " = '" 
@@ -572,9 +650,140 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Cursor c = db.rawQuery(selectQuery, null);
 
-				if (c != null) c.moveToFirst();
+		if (c != null) c.moveToFirst();
 
 		return c.getInt(c.getColumnIndex(KEY_ID));
+	}
+
+	public double getAverageCoals() {
+		String selectQuery = "SELECT AVG(" + KEY_NUM_COALS 
+				+ ") FROM " + TABLE_SESSIONS;
+
+		double average = 0.0;
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor avg = db.rawQuery(selectQuery, null);
+
+		if (avg != null) {
+			avg.moveToLast();
+			average = avg.getDouble(0);
+		}
+
+		return average;
+	}
+
+	public double getAverageShisha() {
+		ArrayList<Session> sessions = getAllSessions();
+
+		double sum = 0;
+		int count = 0;
+		for (Session sesh : sessions) {
+			sum += getBowlSizeFromID(sesh.getBowlId());
+			count++;
+		}
+
+		if(sum == 0 && count == 0) {
+			return 0;
+		}
+		return sum/count;
+	}
+
+	public ArrayList<Session> getAllSessions() {
+		ArrayList<Session> sessions = new ArrayList<Session>();
+		String selectQuery = "SELECT * FROM " + TABLE_SESSIONS;
+
+		Log.e(LOG, selectQuery, null);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+
+				Session session = new Session();
+				session.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+				session.setHookahId(c.getInt(c.getColumnIndex(KEY_HOOKAH_ID)));
+				session.setBowlId(c.getInt(c.getColumnIndex(KEY_BOWL_ID)));
+				session.setShishaId(c.getInt(c.getColumnIndex(KEY_SHISHA_ID)));
+				session.setNumCoals(c.getInt(c.getColumnIndex(KEY_NUM_COALS)));
+				session.setDate(c.getString(c.getColumnIndex(KEY_DATE)));
+
+
+				sessions.add(session);
+
+			} while (c.moveToNext()) ;
+		}
+
+		return sessions;
+	}
+
+	public String getFavoriteHookah() {
+		ArrayList<Session> sessions = getAllSessions();
+		HashMap<String, Integer> hookahs = new HashMap<String, Integer>();
+
+		for (Session sesh : sessions) {
+			String hookah = getHookahFromSession(sesh);
+			if (hookahs.get(hookah) != null) {
+				hookahs.put(hookah, hookahs.get(hookah) + 1);
+			} else {
+				hookahs.put(hookah, 1);
+			}
+		}
+
+		Log.d("size of hash", hookahs.size() + "");
+		String mostCommon = "";
+		int count = 0;
+		for (String hookah : hookahs.keySet()) {
+			if (hookahs.get(hookah) > count) {
+				count = hookahs.get(hookah);
+				mostCommon = hookah;
+			}
+		}
+
+		return mostCommon;
+	}
+
+	public String getFavoriteShisha() {
+		ArrayList<Session> sessions = getAllSessions();
+		HashMap<String, Integer> shishas = new HashMap<String, Integer>();
+
+
+		Log.d("will this print", "yes");
+		for (Session sesh : sessions) {
+			String shisha = getShishaFromSession(sesh);
+			Log.d("will this print", "no");
+			if (shishas.get(shisha) != null) {
+				shishas.put(shisha, shishas.get(shisha) + 1);
+			} else {
+				shishas.put(shisha, 1);
+			}
+		}
+
+		Log.d("size of shisha hash", shishas.size() + "");
+		String mostCommon = "";
+		int count = 0;
+		for (String shisha : shishas.keySet()) {
+			if (shishas.get(shisha) > count) {
+				count = shishas.get(shisha);
+				mostCommon = shisha;
+			}
+		}
+
+		return mostCommon;
+	}
+
+	public int getNumSessions() {
+		ArrayList<Session> sessions = getAllSessions();
+		return sessions.size();
+	}
+
+	public void clearStatistics() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_SESSIONS, null, null);
 	}
 
 

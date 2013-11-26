@@ -47,14 +47,13 @@
     <string name="store_stats">Store Statistics</string>
     <string name="about_message">Hookah Tracker \nNick Coats and Tim Waite \nVersion 1.0</string>
     <string name="help_title">Help</string>
-    <string name="help_message">This app allows the user to record data about coals, shisha, and hookahs.</string>
+    <string name="help_message">To use this app, add at least one hookah, shisha brand, shisha flavor, coal, and bowl to each category. Once this is done, you can record a session that will deduct the products used. You can clear the database and the statistics in the settings.</string>
     
     <string-array name="entries"> 
           <item>Hookahs</item>
           <item>Shisha</item>
           <item>Bowls</item>
           <item>Coals</item>
-          <item>Videos</item>
           <item>Session</item>
     </string-array>
 

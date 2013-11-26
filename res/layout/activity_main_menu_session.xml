@@ -12,5 +12,12 @@
         android:layout_weight="1"
         android:textSize="80sp" />
 
+    <fragment
+        android:id="@+id/session_fragment"
+        android:name="edu.mines.ncoats.hookahtracker.SessionFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="80sp" />
 
 </LinearLayout>

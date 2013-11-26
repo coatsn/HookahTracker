@@ -73,8 +73,7 @@ public class ShishaList extends ListFragment {
 			int brandID = sbs.get(position).getId();
 			Log.d("brand_id", "the id is: " + brandID);
 			Intent intent = new Intent(getActivity().getApplicationContext(), ShishaFlavorActivity.class);
-			
-			intent.putExtra("brand_id", brandID);
+			intent.putExtra("real_brand_id", brandID);
 			startActivity(intent);
 		}
 	}

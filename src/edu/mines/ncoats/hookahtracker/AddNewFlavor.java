@@ -25,6 +25,7 @@ public class AddNewFlavor extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_flavor);
 		brandID = ShishaFlavorActivity.brandID;
+		
 		name = (EditText)findViewById(R.id.shisha_flavor_input);
 		grams = (EditText)findViewById(R.id.shisha_grams_input);
 	}
@@ -81,6 +82,7 @@ public class AddNewFlavor extends Activity {
 		
 		MainActivity.db.createShisha(shisha);
 		Intent intent = new Intent(getApplicationContext(), ShishaFlavorActivity.class);
+		intent.putExtra("real_brand_id", brandID);
 		startActivity(intent);
 	}
 }
