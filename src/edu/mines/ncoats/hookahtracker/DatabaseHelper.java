@@ -86,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			"CREATE TABLE IF NOT EXISTS " + TABLE_SESSIONS + "(" + KEY_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 			+ KEY_HOOKAH_ID + " INTEGER," + KEY_BOWL_ID + " INTEGER,"
-			+ KEY_SHISHA_ID + " INTEGER," + KEY_NUM_COALS + "INTEGER,"
+			+ KEY_SHISHA_ID + " INTEGER," + KEY_NUM_COALS + " INTEGER,"
 			+ KEY_DATE + " DATETIME" + ")";
 
 	public DatabaseHelper(Context context) {
@@ -490,10 +490,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(KEY_NUM_COALS, session.getNumCoals());
 		values.put(KEY_HOOKAH_ID, session.getHookahId());
 		values.put(KEY_BOWL_ID, session.getBowlId());
 		values.put(KEY_SHISHA_ID, session.getShishaId());
-		values.put(KEY_NUM_COALS, session.getNumCoals());
 		values.put(KEY_DATE, session.getDate());
 
 

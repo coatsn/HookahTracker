@@ -214,9 +214,4 @@ public class SessionActivity extends Activity {
 		MainActivity.db.createSession(session);
 		
 	}
-	
-
-	
-	
-
 }
